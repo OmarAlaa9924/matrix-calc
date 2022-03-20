@@ -121,7 +121,7 @@ void multiply_matrix() {
         for (int i = 0; i < row_A; i++) {
             for (int j = 0; j < column_B; j++) {
                 res[i][j] = 0;
-                for (int z = 0; z < column_A; z++)
+                for (int z = 0; z < row_B; z++)
                     res[i][j] += matrix_A[i][z] * matrix_B[z][j];
             }
         }
