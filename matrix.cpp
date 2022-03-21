@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string.h>
 #include <math.h>
+#include <iomanip>
 using namespace std;
 
 void show_matrix();
@@ -161,7 +162,7 @@ void trans_matrix() {
 void trans_cofactor(){
     for(int i=0;i<3;i++){
         for(int j=0;j<3;j++){
-            transpose[i][j]=cofac[j][i];
+            transpose[i][j]= cofac[j][i];
         }
     }
 }
@@ -192,23 +193,15 @@ double determinant( double matrix[50][50], int r) {
     return det;
 }
 void cofactor(double matrix[50][50]){
-    double temp_cofac[50][50];
+
     cofac[0][0] = (matrix[1][1]*matrix[2][2]) - (matrix[2][1]*matrix[1][2]);
-    
     cofac[0][1] = -1*((matrix[1][0]*matrix[2][2]) - (matrix[2][0]*matrix[1][2]));
-    
     cofac[0][2] = (matrix[1][0]*matrix[2][1]) - (matrix[2][0]*matrix[1][1]);
-    
     cofac[1][0] = -1*((matrix[0][1]*matrix[2][2]) - (matrix[2][1]*matrix[0][2]));
-    
     cofac[1][1] = (matrix[0][0]*matrix[2][2]) - (matrix[2][0]*matrix[0][2]);
-    
     cofac[1][2] = -1*((matrix[0][0]*matrix[2][1]) - (matrix[2][0]*matrix[0][1]));
-    
     cofac[2][0] = (matrix[0][1]*matrix[1][2]) - (matrix[1][1]*matrix[0][2]);
-    
     cofac[2][1] = -1*((matrix[0][0]*matrix[1][2]) - (matrix[1][0]*matrix[0][2]));
-    
     cofac[2][2] = (matrix[0][0]*matrix[1][1]) - (matrix[1][0]*matrix[0][1]); 
 }
 void inverse_matrix(double matrix[50][50],int r,int c){
@@ -247,16 +240,20 @@ void inverse_matrix(double matrix[50][50],int r,int c){
     }
 }
 void multiply_invmatrix(){
+    double ew;
      for (int i = 0; i < row_A; i++) {
             for (int j = 0; j < column_B; j++) {
                 res[i][j] = 0;
-                for (int z = 0; z < column_A; z++)
+                for (int z = 0; z < row_B; z++){
                     res[i][j] += matrix_A[i][z] * inv[z][j];
+                }
             }
         }
         for (int i = 0; i < row_A; i++) {
-            for (int j = 0; j < column_B; j++)
-                cout << res[i][j] << " ";
+            for (int j = 0; j < column_B; j++){
+                
+                cout <<fixed << setprecision(2)<<res[i][j] << " ";
+            }
             cout << endl;
         }
 }
@@ -273,3 +270,4 @@ void divide_matrix() {
     else
         cout << "Matrix A columns and Matrix B rows has to be equal\n";
 }
+
