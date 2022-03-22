@@ -25,6 +25,7 @@ double cofac[50][50];
 double inv[50][50];
 bool large;
 bool square;
+bool inf;
 
 int main()
 {
@@ -211,17 +212,17 @@ void inverse_matrix(double matrix[50][50],int r,int c){
     if(r==1){
         inv[0][0]=1/matrix[0][0];
     }
-    else if(r == 2){
-        double d=determinant(matrix,r);
+    double d=determinant(matrix,r);
+        if(d != 0){
         d=1/d;
+     if(r == 2){
         inv[0][0] = d*matrix[1][1];
 		inv[1][1] = d*matrix[0][0];
 		inv[0][1] = -1*d*matrix[0][1];
 		inv[1][0] = -1*d*matrix[1][0];
+		
     }
     else if(r == 3){
-        double d=determinant(matrix,r);
-        d=1/d;
         cofactor(matrix);
         trans_cofactor();
         for(int i=0;i<3;i++){
@@ -234,6 +235,11 @@ void inverse_matrix(double matrix[50][50],int r,int c){
         cout<<"matrix is too large to proccess";
         large=true;
     }
+    }
+    else{cout<<"determinant is equal to zero can't find inverse matrix"<<endl;
+    inf = true;
+    return;
+        }
     }
     else{
         square=false;
@@ -260,6 +266,7 @@ void multiply_invmatrix(){
 void divide_matrix() {
     if (column_A == row_B) {
         inverse_matrix(matrix_B,row_B,column_B);
+        if(inf == false){
         if(square == true && large == false){
         multiply_invmatrix();
         }
@@ -267,7 +274,12 @@ void divide_matrix() {
             cout<<"only applicable for square matrix of maximum size 3"<<endl;
         }
     }
+    else{
+        return;
+    }
+    }
     else
         cout << "Matrix A columns and Matrix B rows has to be equal\n";
 }
+
 
