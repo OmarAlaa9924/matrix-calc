@@ -211,6 +211,7 @@ void inverse_matrix(double matrix[50][50],int r,int c){
     if(r==c){
     if(r==1){
         inv[0][0]=1/matrix[0][0];
+        return;
     }
     double d=determinant(matrix,r);
         if(d != 0){
