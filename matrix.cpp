@@ -206,6 +206,7 @@ void cofactor(double matrix[50][50]){
     cofac[2][2] = (matrix[0][0]*matrix[1][1]) - (matrix[1][0]*matrix[0][1]); 
 }
 void inverse_matrix(double matrix[50][50],int r,int c){
+    double d;
     square =true;
     large = false;
     if(r==c){
@@ -213,7 +214,8 @@ void inverse_matrix(double matrix[50][50],int r,int c){
         inv[0][0]=1/matrix[0][0];
         return;
     }
-    double d=determinant(matrix,r);
+    
+     d=determinant(matrix,r);
         if(d != 0){
         d=1/d;
      if(r == 2){
@@ -282,5 +284,4 @@ void divide_matrix() {
     else
         cout << "Matrix A columns and Matrix B rows has to be equal\n";
 }
-
 
